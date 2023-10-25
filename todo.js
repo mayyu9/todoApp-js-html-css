@@ -1,6 +1,7 @@
 const form = document.getElementById('toDoFrom');
   let toDo = document.getElementById('toDoInput');
   let ul = document.querySelector('ul');
+  let trashBtn = document.getElementById('trash-btn');
 
   const createListItem = (value) => {
     let  li = document.createElement('li');
@@ -18,8 +19,23 @@ const form = document.getElementById('toDoFrom');
     li.style['backgroundColor'] = 'grey';
     li.style['display'] = 'block';
     li.style['marginBottom'] = '10px';
+    // li.style['width'] = "500px";
+    li.style['borderRadius'] = "5px";
+    // li.style['textAlign'] = "left";
+
+    const trashIcon = createTrashButton();
+    li.appendChild(trashIcon);
     return li;
   }
+
+  const createTrashButton = () => {
+    const trashBtn = document.createElement("i");
+    trashBtn.setAttribute("class", "fas fa-trash");
+    trashBtn.setAttribute("id", "trash-btn");
+    trashBtn.setAttribute('color', 'red');
+
+    return trashBtn;
+  };
 
   const creatCheckBox = () => {
     // Create checkbox (its a input box of type checkbox).
@@ -62,4 +78,8 @@ const form = document.getElementById('toDoFrom');
         submitHandler(e);
         // alert('enter press');
     }
+  })
+
+  trashBtn.addEventListener('click', () => {
+    alert('trash button clicked');
   })
