@@ -1,12 +1,13 @@
 const form = document.getElementById('toDoFrom');
   let toDo = document.getElementById('toDoInput');
   let ul = document.querySelector('ul');
-  let trashBtn = document.getElementById('trash-btn');
+  let trashBtn;
+  let index = 1;
 
   const createListItem = (value) => {
     let  li = document.createElement('li');
 
-    const checkbox = creatCheckBox();
+    const checkbox = creatCheckBox(index);
          
     li.appendChild(checkbox);
 
@@ -45,7 +46,8 @@ const form = document.getElementById('toDoFrom');
     checkBox.type = "checkbox";
     checkBox.value = "checkbox";
     checkBox.style.opacity = "1";
-    checkBox.className = "delete-item right";
+    checkBox.className = "check-item";
+    checkBox.id = `check-item-${index}`;
     // checkbox.style.position =  "relative";
     checkBox.style.marginRight = '3px'; 
     return checkBox;
@@ -53,6 +55,7 @@ const form = document.getElementById('toDoFrom');
   
   const submitHandler = e => {
     e.preventDefault();
+
     if(toDo.value != null ) {
       let value = toDo.value;
       let liItem = createListItem(value);
@@ -62,8 +65,15 @@ const form = document.getElementById('toDoFrom');
     // let toDoList = creatCheckBox(value);
     // ul.appendChild(toDoList);
 
+      trashBtn = document.getElementById('trash-btn');
+      trashBtn.addEventListener('click', (e) => {
+        // this.removeChild(e.target);
+        alert('trash button clicked:', e.target);
+      })
+
       toDo.value = '';
       document.getElementById('toDoInput').innerHTML = '';
+      index++;
     } else {
         alert('please enter the todo');
     }
@@ -80,6 +90,7 @@ const form = document.getElementById('toDoFrom');
     }
   })
 
-  trashBtn.addEventListener('click', () => {
-    alert('trash button clicked');
+  ul.addEventListener('click', function(e) {
+    // alert('e.target: ', e.target);
+    this.removeChild(e.target);
   })
