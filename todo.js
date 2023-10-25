@@ -4,34 +4,35 @@ const form = document.getElementById('toDoFrom');
 
   const createListItem = (value) => {
     let  li = document.createElement('li');
+
+    const checkbox = creatCheckBox();
+         
+    li.appendChild(checkbox);
+
+    let text = document.createTextNode(value);
+
+    li.appendChild(text);
+    // li.innerHTML = value;
     
-    li.textContent = value;
-    // li.style['border'] = '1px solid maroon';
     li.style['padding'] = '5px 5px';
     li.style['backgroundColor'] = 'grey';
     li.style['display'] = 'block';
     li.style['marginBottom'] = '10px';
-    // li.appendChild(div);
     return li;
   }
 
-  const creatCheckBox = (value) => {
+  const creatCheckBox = () => {
     // Create checkbox (its a input box of type checkbox).
-    var chk = document.createElement('input');  
+    let checkBox = document.createElement('input');  
           
     // Specify the type of element.
-    chk.setAttribute('type', 'checkbox');
-    chk.setAttribute('id', 'prodName');  // Set an ID.
-    chk.setAttribute('value', '');
-    chk.setAttribute('name', 'products');
-
-    // Create label for checkbox.
-    var lbl = document.createElement('label');  
-    lbl.setAttribute('for', 'prodName');
-
-    // Create text node and append it to the label.
-    lbl.appendChild(document.createTextNode(createListItem(value)));
-    // lbl.appendChild(createListItem(value));
+    checkBox.type = "checkbox";
+    checkBox.value = "checkbox";
+    checkBox.style.opacity = "1";
+    checkBox.className = "delete-item right";
+    // checkbox.style.position =  "relative";
+    checkBox.style.marginRight = '3px'; 
+    return checkBox;
   }
   
   const submitHandler = e => {
@@ -47,6 +48,8 @@ const form = document.getElementById('toDoFrom');
 
       toDo.value = '';
       document.getElementById('toDoInput').innerHTML = '';
+    } else {
+        alert('please enter the todo');
     }
       
   }
